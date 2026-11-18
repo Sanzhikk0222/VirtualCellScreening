@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0A0E1A" />
+
+    <title>Virtual Cell Screening: drug screening on a virtual cell</title>
+    <meta
+      name="description"
+      content="Pick a cell line and a compound, run a genome-scale metabolic model of that cell, and see the predicted growth inhibition and the pathways behind it."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / social previews. __SITE_URL__ is filled in at build time (see vite.config.ts). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Virtual Cell Screening" />
+    <meta property="og:title" content="Virtual Cell Screening: drug screening on a virtual cell" />
+    <meta
+      property="og:description"
+      content="Pick a cell line and a compound, run a genome-scale metabolic model of that cell, and see the predicted growth inhibition and the pathways behind it."
+    />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:image" content="__SITE_URL__/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Virtual Cell Screening: a glowing 3D cell on a dark blue background"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:locale:alternate" content="kk_KZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="__SITE_URL__/og.png" />
+
+    <!-- Avoids a white flash before the stylesheet arrives. -->
+    <style>
+      html {
+        background: #0a0e1a;
+        color-scheme: dark;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; color: #eaeefa; font-family: sans-serif">
+        Virtual Cell Screening needs JavaScript. / Для работы сайта нужен JavaScript. / Сайт жұмыс
+        істеуі үшін JavaScript қажет.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
