@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/*
+  Design tokens (Tailwind v4 reads them from CSS instead of tailwind.config.js).
+  Palette: deep navy ground, aqua and azure as the two light sources, coral for warm contrast.
+*/
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Space Grotesk has no Cyrillic. For ru/kk the override below swaps in Inter. */
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #0a0e1a;
+  --color-ink-900: #0e1426;
+  --color-ink-800: #141c34;
+  --color-ink-700: #1c2645;
+  --color-ink-600: #2a3558;
+
+  --color-fg: #eaeefa;
+  /* Muted text sits directly on the animated background, so it is tuned for 4.5:1 on the brightest blobs. */
+  --color-fg-muted: #bcc5de;
+  /* Subtle is for decoration and large text only: it drops below 4.5:1 on the brightest blobs. */
+  --color-fg-subtle: #98a3c2;
+
+  --color-aqua-300: #86ece0;
+  --color-aqua-400: #3fd9c8;
+  --color-aqua-500: #1fb7a8;
+  --color-azure-300: #8dbcff;
+  --color-azure-400: #5b9dff;
+  --color-azure-500: #3b7cf0;
+  --color-violet-400: #9d8cff;
+  --color-coral-400: #ff8f70;
+
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-line-strong: rgb(255 255 255 / 0.18);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-scroll-cue: scroll-cue 2.2s var(--ease-out-expo) infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+  --animate-drift-a: drift-a 28s ease-in-out infinite alternate;
+  --animate-drift-b: drift-b 34s ease-in-out infinite alternate;
+  --animate-drift-c: drift-c 40s ease-in-out infinite alternate;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -14px, 0);
+    }
+  }
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+  @keyframes drift-a {
+    from {
+      transform: translate3d(-10%, -6%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(14%, 10%, 0) scale(1.25);
+    }
+  }
+  @keyframes drift-b {
+    from {
+      transform: translate3d(12%, 8%, 0) scale(1.15);
+    }
+    to {
+      transform: translate3d(-14%, -10%, 0) scale(0.95);
+    }
+  }
+  @keyframes drift-c {
+    from {
+      transform: translate3d(0, 12%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-8%, -14%, 0) scale(1.3);
+    }
+  }
+}
+
+/* Russian and Kazakh headings use Inter: it carries the Cyrillic and the extra Kazakh letters. */
+html[lang="ru"],
+html[lang="kk"] {
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  hyphens: auto;
+}
+
+html {
+  background: var(--color-ink-950);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-600) var(--color-ink-950);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--color-ink-950);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* "clip" (unlike "hidden") does not turn <body> into a scroll container, so sticky keeps working. */
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: rgb(63 217 200 / 0.32);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-aqua-400);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled),
+select:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Frosted surface used for the nav, demo panel and organelle panel. */
+@utility glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.025));
+  border: 1px solid var(--color-line);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 24px 60px -28px rgb(0 0 0 / 0.6);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgb(20 28 52 / 0.92);
+  }
+}
+
+/* Skeleton block used while a screening runs. */
+@utility skeleton {
+  background: linear-gradient(
+    100deg,
+    rgb(255 255 255 / 0.05) 20%,
+    rgb(255 255 255 / 0.13) 40%,
+    rgb(255 255 255 / 0.05) 60%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* CSS-only mesh gradient: first paint, WebGL failure and reduced-motion fallback. */
+.mesh-fallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-ink-950);
+}
+.mesh-blob {
+  position: absolute;
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
