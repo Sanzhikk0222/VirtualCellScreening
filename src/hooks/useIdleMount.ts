@@ -8,11 +8,14 @@ export function useIdleMount(timeout = 1500): boolean {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout });
+    // Safari has no requestIdleCallback, so look it up at run time instead of narrowing `window`.
+    const idle = (window as Window & typeof globalThis).requestIdleCallback as
+      | ((callback: () => void, options?: { timeout: number }) => number)
+      | undefined;
+    if (typeof idle === "function") {
+      const id = idle.call(window, () => setReady(true), { timeout });
       return () => window.cancelIdleCallback(id);
     }
-    // Safari has no requestIdleCallback.
     const id = window.setTimeout(() => setReady(true), 350);
     return () => window.clearTimeout(id);
   }, [timeout]);
