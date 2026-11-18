@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useReduced } from "@/hooks/useMedia";
 import { cn } from "@/lib/cn";
@@ -137,7 +137,9 @@ export function CompoundIllustration({ active }: IllustrationProps) {
             strokeWidth="2"
             strokeLinecap="round"
             initial={false}
-            animate={{ pathLength: draw ? 1 : 0, opacity: draw ? 1 : 0 }}
+            animate={
+              { pathLength: draw ? 1 : 0, opacity: draw ? 1 : 0 } as unknown as TargetAndTransition
+            }
             transition={{ duration: reduced ? 0 : 0.5, delay: reduced ? 0 : i * 0.12 }}
           />
         ))}
@@ -267,7 +269,7 @@ export function ResultIllustration({ active }: IllustrationProps) {
           strokeWidth="9"
           strokeLinecap="round"
           initial={false}
-          animate={{ pathLength: draw ? 0.62 : 0 }}
+          animate={{ pathLength: draw ? 0.62 : 0 } as unknown as TargetAndTransition}
           transition={{ duration: reduced ? 0 : 1.2, ease: [0.16, 1, 0.3, 1] }}
         />
       </svg>
