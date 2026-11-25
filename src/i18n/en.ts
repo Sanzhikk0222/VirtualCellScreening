@@ -216,6 +216,13 @@ export const en: Dictionary = {
       runtime: "Run time",
       seconds: "s",
       customCompound: "Custom structure",
+      verifyTitle: "Check this result",
+      verifyText:
+        "Independent public records for this compound and cell line, and how the model is validated.",
+      verifyCompound: "Compound in PubChem",
+      verifyCompoundCustom: "Search this structure in PubChem",
+      verifyCellLine: "Cell line in Cellosaurus",
+      verifyMethod: "How the model is validated",
       disclaimer:
         "Predictions are hypotheses for choosing experiments. They do not replace wet-lab testing.",
     },

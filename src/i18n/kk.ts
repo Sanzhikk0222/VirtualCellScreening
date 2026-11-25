@@ -219,6 +219,13 @@ export const kk: Dictionary = {
       runtime: "Есептеу уақыты",
       seconds: "с",
       customCompound: "Өз құрылымы",
+      verifyTitle: "Нәтижені тексеру",
+      verifyText:
+        "Осы зат пен жасуша линиясы туралы тәуелсіз ашық деректер және модельдің қалай тексерілетіні.",
+      verifyCompound: "PubChem-дегі зат",
+      verifyCompoundCustom: "Бұл құрылымды PubChem-нен іздеу",
+      verifyCellLine: "Cellosaurus-тағы жасуша линиясы",
+      verifyMethod: "Модель қалай тексеріледі",
       disclaimer:
         "Болжамдар тәжірибелерді таңдауға арналған гипотеза болып табылады. Олар зертханалық тексерудің орнын баспайды.",
     },

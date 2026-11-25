@@ -220,6 +220,13 @@ export const ru: Dictionary = {
       runtime: "Время расчёта",
       seconds: "с",
       customCompound: "Собственная структура",
+      verifyTitle: "Проверить результат",
+      verifyText:
+        "Независимые открытые данные об этом веществе и клеточной линии и описание того, как проверяется модель.",
+      verifyCompound: "Вещество в PubChem",
+      verifyCompoundCustom: "Найти эту структуру в PubChem",
+      verifyCellLine: "Клеточная линия в Cellosaurus",
+      verifyMethod: "Как проверяется модель",
       disclaimer:
         "Прогнозы служат гипотезами для выбора экспериментов. Они не заменяют лабораторные проверки.",
     },

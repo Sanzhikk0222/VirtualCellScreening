@@ -125,6 +125,12 @@ export interface Dictionary {
       runtime: string;
       seconds: string;
       customCompound: string;
+      verifyTitle: string;
+      verifyText: string;
+      verifyCompound: string;
+      verifyCompoundCustom: string;
+      verifyCellLine: string;
+      verifyMethod: string;
       disclaimer: string;
     };
     cellLines: Record<CellLineId, string>;
