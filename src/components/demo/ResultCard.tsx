@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUp, FlaskConical } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight, FlaskConical } from "lucide-react";
 import { lazy, Suspense } from "react";
 import { SceneBoundary } from "@/components/cell/SceneBoundary";
 import { Counter } from "@/components/ui/Counter";
@@ -7,6 +7,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { formatNumber } from "@/i18n/format";
 import { useI18n } from "@/i18n/I18nProvider";
 import { EASE_OUT_EXPO } from "@/lib/cn";
+import { CELL_LINE_REFERENCES, compoundReferenceUrl, METHOD_URL } from "@/lib/references";
 import type { ScreeningResult } from "@/lib/types";
 import {
   DECREASE_COLOR,
@@ -174,6 +175,49 @@ export function ResultCard({ result }: { result: ScreeningResult }) {
             </Suspense>
           </SceneBoundary>
         </div>
+      </section>
+
+      {/* Where to check the result */}
+      <section
+        aria-labelledby="verify-title"
+        className="mt-10 rounded-2xl border border-line bg-white/[0.03] p-5 md:p-6"
+      >
+        <h4 id="verify-title" className="font-medium">
+          {r.verifyTitle}
+        </h4>
+        <p className="mt-1.5 text-sm text-fg-muted">{r.verifyText}</p>
+        <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+          <li>
+            <a
+              href={compoundReferenceUrl(compoundId, result.compound.smiles)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-1 text-aqua-300 underline-offset-4 hover:underline"
+            >
+              {compoundId ? r.verifyCompound : r.verifyCompoundCustom}
+              <ArrowUpRight aria-hidden="true" className="size-4" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={CELL_LINE_REFERENCES[result.cellLine]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-1 text-aqua-300 underline-offset-4 hover:underline"
+            >
+              {r.verifyCellLine}
+              <ArrowUpRight aria-hidden="true" className="size-4" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={METHOD_URL}
+              className="inline-flex min-h-11 items-center text-aqua-300 underline-offset-4 hover:underline"
+            >
+              {r.verifyMethod}
+            </a>
+          </li>
+        </ul>
       </section>
 
       {/* Run details */}
