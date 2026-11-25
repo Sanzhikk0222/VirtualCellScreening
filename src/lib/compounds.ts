@@ -1,3 +1,4 @@
+import { structureKey } from "./skeleton";
 import type { CellLineId, CompoundId, PathwayId } from "./types";
 
 export interface CompoundPreset {
@@ -104,8 +105,21 @@ export function getPreset(id: CompoundId): CompoundPreset {
   return preset;
 }
 
-/** Finds a preset by structure, so pasting a preset's SMILES behaves like picking it. */
+let presetKeys: Map<string, CompoundPreset> | null = null;
+
+/**
+ * Finds a preset by molecule, not by text: the same drug written in another valid SMILES
+ * (other atom order, aromatic or Kekule rings, with or without stereo marks) is still found,
+ * so pasting it behaves exactly like picking the preset.
+ */
 export function findPresetBySmiles(smiles: string): CompoundPreset | undefined {
-  const needle = smiles.trim();
-  return COMPOUND_PRESETS.find((item) => item.smiles === needle);
+  if (!presetKeys) {
+    presetKeys = new Map();
+    for (const preset of COMPOUND_PRESETS) {
+      const key = structureKey(preset.smiles);
+      if (key) presetKeys.set(key, preset);
+    }
+  }
+  const key = structureKey(smiles);
+  return key ? presetKeys.get(key) : undefined;
 }

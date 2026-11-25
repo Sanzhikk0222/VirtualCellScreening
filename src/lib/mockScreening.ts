@@ -90,14 +90,16 @@ export async function mockScreen(
   signal?: AbortSignal,
 ): Promise<ScreeningResult> {
   const smiles = request.smiles.trim();
-  const rand = seeded(hash(`${request.cellLine}|${smiles}`));
+  // Known drug (picked from the list, or pasted as any valid SMILES of it): the seed comes from the
+  // drug, not from the text, so every way of entering it gives the same numbers.
+  const preset = request.compoundId ? getPreset(request.compoundId) : findPresetBySmiles(smiles);
+  const rand = seeded(hash(`${request.cellLine}|${preset ? `preset:${preset.id}` : smiles}`));
   const delay = 2200 + Math.floor(rand() * 900);
 
   await wait(delay, signal);
 
   if (smiles.toLowerCase() === "error") throw new ScreeningError("server", 500);
 
-  const preset = request.compoundId ? getPreset(request.compoundId) : findPresetBySmiles(smiles);
   const base = preset ? fromPreset(preset, request.cellLine, rand) : fromUnknownStructure(rand);
   const profile = [...base.profile].sort(byStrength);
 
